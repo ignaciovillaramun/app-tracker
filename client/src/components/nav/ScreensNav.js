@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignIn from '../../screens/SignIn';
-import Signup from '../../screens/Signup';
+// import Signup from '../../screens/Signup';
 import Stops from '../../screens/Stops';
 import { AuthContext } from '../../context/auth';
 import HeaderTabs from './HeaderTabs';
 import Profile from '../../screens/Profile';
-import List from '../../screens/Bus';
 import Notification from '../../screens/Notification';
 import ForgotPassword from '../../screens/ForgotPassword';
 import Enable from '../../screens/Enable';
