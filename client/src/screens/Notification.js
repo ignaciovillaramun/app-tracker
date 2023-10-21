@@ -38,10 +38,10 @@ export default function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  function notificationsChange(value) {
+  function notificationsChange(value, notification) {
     try {
       update(ref(db, '/notifications'), {
-        brokenDown: !value,
+        [notification]: !value,
       });
     } catch (error) {
       console.log(error);
@@ -68,7 +68,7 @@ export default function App() {
             style={styles.switch}
             onValueChange={() => {
               setVBD((prevValue) => !prevValue);
-              notificationsChange(vdb);
+              notificationsChange(vdb, 'brokenDown');
             }}
             value={vdb}
           />
@@ -79,7 +79,7 @@ export default function App() {
             style={styles.switch}
             onValueChange={() => {
               setHT((prevValue) => !prevValue);
-              notificationsChange(ht);
+              notificationsChange(ht, 'traffic');
             }}
             value={ht}
           />
@@ -90,7 +90,7 @@ export default function App() {
             style={styles.switch}
             onValueChange={() => {
               setRD((prevValue) => !prevValue);
-              notificationsChange(rd);
+              notificationsChange(rd, 'deviation');
             }}
             value={rd}
           />
@@ -101,7 +101,7 @@ export default function App() {
             style={styles.switch}
             onValueChange={() => {
               setRH((prevValue) => !prevValue);
-              notificationsChange(rh);
+              notificationsChange(rh, 'reduce');
             }}
             value={rh}
           />

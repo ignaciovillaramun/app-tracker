@@ -72,7 +72,6 @@ export default function EnableLocation({ navigation }) {
         latitude,
         longitude,
         timestamp,
-        heading,
       };
 
       try {
