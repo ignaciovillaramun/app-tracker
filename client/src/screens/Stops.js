@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import FooterTabs from '../components/nav/FooterTabs';
 import { Picker } from '@react-native-picker/picker';
@@ -18,6 +19,11 @@ const Stops = () => {
   const [passengerOff, setPassengerOff] = useState('');
   const [passengerOn, setPassengerOn] = useState('');
   const [passengerData, setPassengerData] = useState([]);
+
+  const createTwoButtonAlert = () =>
+    Alert.alert('Recorded', 'Thank you!', [
+      { text: 'OK', onPress: () => console.log('OK Pressed') },
+    ]);
 
   const handleFormSubmit = () => {
     const selectedTime = new Date();
@@ -56,7 +62,7 @@ const Stops = () => {
     setPassengerOff('');
     setPassengerOn('');
 
-    alert('Recorded');
+    createTwoButtonAlert();
   };
 
   return (
