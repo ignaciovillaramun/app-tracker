@@ -49,6 +49,8 @@ const Home = () => {
     setSelectedPlace('');
     setPassengerOff('');
     setPassengerOn('');
+
+    alert('Recorded');
   };
 
   return (
@@ -62,7 +64,13 @@ const Home = () => {
             onValueChange={(itemValue, itemIndex) => {
               setSelectedPlace(itemValue);
             }}
-            style={tw`border rounded p-2`}
+            style={tw` rounded p-2`}
+            itemStyle={{
+              placeholderTextColor: 'blue',
+              color: 'orange',
+              fontFamily: 'Ebrima',
+              fontSize: 17,
+            }}
           >
             <Picker.Item label="Select a place" value="" />
             <Picker.Item label="BYUI PARKING LOT" value="BYUI PARKING LOT" />
