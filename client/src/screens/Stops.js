@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import FooterTabs from '../components/nav/FooterTabs';
 import { Picker } from '@react-native-picker/picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -7,7 +13,7 @@ import { ref, update, push } from 'firebase/database';
 import { db } from '../../firebaseCongif';
 import tw from 'twrnc';
 
-const Home = () => {
+const Stops = () => {
   const [selectedPlace, setSelectedPlace] = useState('');
   const [passengerOff, setPassengerOff] = useState('');
   const [passengerOn, setPassengerOn] = useState('');
@@ -56,15 +62,18 @@ const Home = () => {
   return (
     <>
       <KeyboardAwareScrollView contentContainerStyle={tw`flex-1 bg-white p-4`}>
+        <View style={styles.container}>
+          <Text style={styles.heading}>Stops</Text>
+        </View>
         {/* Place Section */}
         <View style={tw`p-4`}>
-          <Text style={tw`mb-2 text-2xl pb-10 z-10 mb-[-20] text-center font-bold`}>Place:</Text>
+          <Text style={tw`mb-2 text-lg font-medium mb-[-30]`}>Place:</Text>
           <Picker
             selectedValue={selectedPlace}
             onValueChange={(itemValue, itemIndex) => {
               setSelectedPlace(itemValue);
             }}
-            style={tw` rounded p-2 my-[-20px]`}
+            style={tw` rounded p-2`}
             itemStyle={{
               placeholderTextColor: 'blue',
               fontSize: 20,
@@ -85,7 +94,9 @@ const Home = () => {
 
         {/* Passenger Off Section */}
         <View style={tw`p-4`}>
-          <Text style={tw`mb-2 mt-[-30px] text-lg font-medium`}>Passenger Off:</Text>
+          <Text style={tw`mb-2 mt-[-30px] text-lg font-medium`}>
+            Passenger Off:
+          </Text>
           <TextInput
             style={tw`border rounded p-2 text-lg`}
             placeholder="Number of passengers off"
@@ -108,9 +119,9 @@ const Home = () => {
         </View>
         <TouchableOpacity
           onPress={handleFormSubmit}
-          style={tw`bg-yellow-500 rounded-md p-2 mt-4`}
+          style={tw`bg-yellow-500 p-4 rounded-lg mt-6 mx-auto w-10/12 px-7`}
         >
-          <Text style={tw`text-white text-center text-2xl `}>
+          <Text style={tw`text-white text-center text-lg `}>
             Send Information
           </Text>
         </TouchableOpacity>
@@ -122,4 +133,16 @@ const Home = () => {
   );
 };
 
-export default Home;
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 55,
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  heading: {
+    fontSize: 28,
+    fontWeight: '600',
+  },
+});
+
+export default Stops;

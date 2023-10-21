@@ -116,12 +116,12 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    marginBottom: 20,
     alignItems: 'center',
   },
   heading: {
     fontSize: 28,
-    fontWeight:'600'
+    fontWeight: '600',
   },
   PictureContainer: {
     marginTop: 70,

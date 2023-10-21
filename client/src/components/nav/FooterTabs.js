@@ -23,19 +23,26 @@ export default function FooterTabs() {
   return (
     <>
       <Divider width={1} />
-      <View style={tw`flex-row justify-between pt-5 px-9`}>
+      <View style={tw`flex-row justify-between pt-8 px-9`}>
         <Tab
           name="Bus"
           icon="bus"
-          handlePress={() => navigation.navigate('BusSelector')}
-          screenName="Bus Selector"
+          handlePress={() => navigation.navigate('Bus')}
+          screenName="Bus"
           routeName={route.name}
         />
         <Tab
-          name="Home"
+          name="Enable"
+          icon="location-arrow"
+          handlePress={() => navigation.navigate('Enable')}
+          screenName="Enable"
+          routeName={route.name}
+        />
+        <Tab
+          name="Stops"
           icon="clipboard-list"
-          handlePress={() => navigation.navigate('Home')}
-          screenName="Home"
+          handlePress={() => navigation.navigate('Stops')}
+          screenName="Stops"
           routeName={route.name}
         />
         <Tab

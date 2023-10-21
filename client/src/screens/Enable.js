@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Text, View, Image, TouchableOpacity, Animated } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 import FooterTabs from '../components/nav/FooterTabs';
@@ -8,37 +8,16 @@ import { ref, set, update } from 'firebase/database';
 import { db } from '../../firebaseCongif';
 import tw from 'twrnc';
 
-export function stopShowingLocation(setIsDriving, intervalId, setShowLocation) {
-  setIsDriving(true);
-  console.log('stop');
-  if (intervalId) {
-    clearInterval(intervalId);
-    setIntervalId(null);
-  }
-  setShowLocation(false);
-
-  try {
-    // send updated location to firebase
-    update(ref(db, 'locations/'), {
-      isDriving: isDriving,
-    });
-    console.log('Location data saved successfully');
-  } catch (error) {
-    console.error('Error saving location data:', error);
-  }
-}
-
 export default function EnableLocation({ navigation }) {
-  // ... (the rest of your component code)
   const [location, setLocation] = useState(null);
   const [showLocation, setShowLocation] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
   const [isDriving, setIsDriving] = useState(false);
+  const [jumpAnimation] = useState(new Animated.Value(0));
 
   const getPermissions = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     let data = await AsyncStorage.getItem('@auth');
-    // const userId = data.
     const userData = JSON.parse(data);
 
     if (status !== 'granted') {
@@ -58,11 +37,9 @@ export default function EnableLocation({ navigation }) {
     const { latitude, longitude } = currentLocation.coords;
     const timestamp = currentLocation.timestamp;
 
-    // Get specific data from user
     const { name } = userData.user;
     const { url } = userData.user.image;
 
-    // Create a custom object with desired properties
     const locationData = {
       latitude,
       longitude,
@@ -73,31 +50,24 @@ export default function EnableLocation({ navigation }) {
       url,
     };
 
-    // set location to firebase
     try {
-      // Attempt to set the location data in the Firebase database
       await set(ref(db, 'locations/'), {
         location: locationData,
         userInfo: userInfo,
         isDriving: isDriving,
       });
       console.log('Location data saved successfully');
-      // console.log(currentLocation.coords);
     } catch (error) {
       console.error('Error saving location data:', error);
     }
-
-    // send first location to firebase
 
     const id = setInterval(async () => {
       const updatedLocation = await Location.getCurrentPositionAsync();
       setLocation(updatedLocation);
 
-      // Get specific data from location
       const { latitude, longitude, heading } = updatedLocation.coords;
       const timestamp = updatedLocation.timestamp;
 
-      // Create a custom object with desired properties
       const locationData = {
         latitude,
         longitude,
@@ -106,7 +76,6 @@ export default function EnableLocation({ navigation }) {
       };
 
       try {
-        // send updated location to firebase
         update(ref(db, 'locations/'), {
           location: locationData,
           userInfo: userInfo,
@@ -132,7 +101,6 @@ export default function EnableLocation({ navigation }) {
     setShowLocation(false);
 
     try {
-      // send updated location to firebase
       update(ref(db, 'locations/'), {
         isDriving: isDriving,
       });
@@ -142,11 +110,43 @@ export default function EnableLocation({ navigation }) {
     }
   };
 
+  const jumpOnce = () => {
+    Animated.sequence([
+      Animated.timing(jumpAnimation, {
+        toValue: -100,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+      Animated.timing(jumpAnimation, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+
+  const jumpMultipleTimes = (times, interval) => {
+    let count = 0;
+    const jumpInterval = setInterval(() => {
+      jumpOnce();
+      count++;
+      if (count >= times) {
+        clearInterval(jumpInterval);
+      }
+    }, interval);
+  };
+
   useEffect(() => {
-    // Clear the interval when showLocation becomes false
     if (!showLocation && intervalId) {
       clearInterval(intervalId);
       setIntervalId(null);
+    }
+  }, [showLocation]);
+
+  useEffect(() => {
+    if (showLocation) {
+      // Trigger the jump animation 3 times with a 667ms interval between jumps (2 seconds in total)
+      jumpMultipleTimes(3, 667);
     }
   }, [showLocation]);
 
@@ -154,9 +154,18 @@ export default function EnableLocation({ navigation }) {
     <>
       <View style={tw`flex-1 bg-white items-center`}>
         <View style={tw`mt-40 items-center`}>
-          <Image
+          <Animated.Image
             source={require('../assets/icon-location.png')}
-            style={tw`rounded-full`}
+            style={[
+              tw`rounded-full`,
+              {
+                transform: [
+                  {
+                    translateY: jumpAnimation,
+                  },
+                ],
+              },
+            ]}
           />
         </View>
         <Text style={tw`text-3xl w-40.5 text-center mt-10`}>
@@ -165,9 +174,14 @@ export default function EnableLocation({ navigation }) {
         {!showLocation ? (
           <TouchableOpacity
             style={tw`bg-yellow-500 rounded-md py-4 px-20 mt-6`}
-            onPress={() => {
+            onPress={async () => {
               getPermissions();
-              navigation.navigate('Home');
+              await new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve();
+                }, 2800); // Wait for 2 seconds for the animation to complete
+              });
+              navigation.navigate('Stops');
             }}
           >
             <Text style={tw`text-white font-semibold text-center`}>Enable</Text>
@@ -175,7 +189,7 @@ export default function EnableLocation({ navigation }) {
         ) : (
           <>
             <TouchableOpacity
-              style={tw`bg-yellow-500 rounded-md py-4 px-20 mt-6`}
+              style={tw`bg-black rounded-md py-4 px-20 mt-6 opacity-70`}
               onPress={stopShowingLocation}
             >
               <Text style={tw`text-white font-semibold text-center`}>

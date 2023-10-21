@@ -52,7 +52,7 @@ const Signup = ({ navigation }) => {
         console.log('SIGN IN SUCCESS =>', data);
         alert('Sign up successful');
         // redirect
-        navigation.navigate('Home');
+        navigation.navigate('Stops');
       }
 
       // setShowAlert(true);

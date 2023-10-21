@@ -23,7 +23,7 @@ export default function List() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   function handleAlert() {
     alert('Please choose one option');
@@ -32,8 +32,10 @@ export default function List() {
   return (
     <>
       <SafeAreaView style={tw`flex-1 bg-white p-4 justify-center`}>
-        <Text style={tw`text-3xl font-semibold mt-[-40px] mb-22 text-center`}>Choose a Vehicle</Text>
-        <View style={tw`flex-row justify-between mb-4 px-7`}>
+        <Text style={tw`text-3xl font-semibold mt-[-100px] mb-22 text-center`}>
+          Choose a Vehicle
+        </Text>
+        <View style={tw`flex-row justify-between mt-30 mb-4 px-7`}>
           <TouchableOpacity
             style={[
               tw`p-4 justify-center items-center w-38`,
@@ -41,8 +43,20 @@ export default function List() {
             ]}
             onPress={() => handleOptionSelect('Van')}
           >
-            <Icon name="bus" size={60} style={tw`mb-2`} color={selectedOption === 'Van' ? 'white' : '#FEC007'} />
-            <Text style={[tw`text-center mt-2 text-2xl`, selectedOption === 'Van' && { color: 'white' }]}>Van</Text>
+            <Icon
+              name="bus"
+              size={60}
+              style={tw`mb-2`}
+              color={selectedOption === 'Van' ? 'white' : '#FEC007'}
+            />
+            <Text
+              style={[
+                tw`text-center mt-2 text-2xl`,
+                selectedOption === 'Van' && { color: 'white' },
+              ]}
+            >
+              Van
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
@@ -51,8 +65,20 @@ export default function List() {
             ]}
             onPress={() => handleOptionSelect('Bus')}
           >
-            <Icon name="bus-alt" size={60} style={tw`mb-2`} color={selectedOption === 'Bus' ? 'white' : '#FEC007'} />
-            <Text style={[tw`text-center mt-2 text-2xl`, selectedOption === 'Bus' && { color: 'white' }]}>Bus</Text>
+            <Icon
+              name="bus-alt"
+              size={60}
+              style={tw`mb-2`}
+              color={selectedOption === 'Bus' ? 'white' : '#FEC007'}
+            />
+            <Text
+              style={[
+                tw`text-center mt-2 text-2xl`,
+                selectedOption === 'Bus' && { color: 'white' },
+              ]}
+            >
+              Bus
+            </Text>
           </TouchableOpacity>
         </View>
         {selectedOption ? (
@@ -61,18 +87,28 @@ export default function List() {
               style={tw`bg-yellow-500 p-4 rounded-lg mt-6 w-10/12`}
               onPress={() => {
                 submitBusType();
-                navigation.navigate('EnableLocation');
+                navigation.navigate('Enable');
               }}
             >
-              <Text style={tw`text-center text-lg font-medium text-white text-2xl`}>Select {selectedOption}</Text>
+              <Text
+                style={tw`text-center text-lg font-medium text-white text-2xl`}
+              >
+                Select {selectedOption}
+              </Text>
             </TouchableOpacity>
           </View>
         ) : (
           <View style={tw`mb-4 justify-center items-center`}>
             <TouchableOpacity
-              style={[tw`bg-yellow-500 p-4 rounded-lg mt-6 w-10/12 px-7`, { opacity: 0.5 }]}
-              onPress={handleAlert}>
-              <Text style={tw`text-center text-lg font-medium text-white`}>Select</Text>
+              style={[
+                tw`bg-yellow-500 p-4 rounded-lg mt-6 w-10/12 px-7`,
+                { opacity: 0.5 },
+              ]}
+              onPress={handleAlert}
+            >
+              <Text style={tw`text-center text-lg font-medium text-white`}>
+                Select
+              </Text>
             </TouchableOpacity>
           </View>
         )}
@@ -83,4 +119,3 @@ export default function List() {
     </>
   );
 }
-

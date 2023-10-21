@@ -64,7 +64,6 @@ export const signup = async (req, res) => {
         expiresIn: '7d',
       });
 
-      //   console.log(user);
       const { password, ...rest } = user._doc;
       return res.json({
         token,
@@ -180,7 +179,7 @@ export const forgotPassword = async (req, res) => {
   // send email
   try {
     const data = await sgMail.send(emailData);
-    console.log(data);
+    // console.log(data);
     res.json({ ok: true });
   } catch (err) {
     console.log(err);

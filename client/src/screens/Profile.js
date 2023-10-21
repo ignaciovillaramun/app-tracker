@@ -1,7 +1,7 @@
 // import CustomAlert from '../components/Alert';
 import tw from 'twrnc';
 import React, { useState, useContext, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import UserInput from '../components/auth/UserInput';
 import SubmitButton from '../components/auth/SubmitButton';
@@ -105,6 +105,9 @@ const Profile = ({ navigation }) => {
       <KeyboardAwareScrollView
         contentContainerStyle={tw`flex-1 items-center bg-gray-100`}
       >
+        <View style={styles.container}>
+          <Text style={styles.heading}>Profile</Text>
+        </View>
         <View style={tw`mt-10 mb-10`}>
           <Logo>
             {image && image.url ? (
@@ -154,7 +157,7 @@ const Profile = ({ navigation }) => {
           loading={loading}
         /> */}
           <TouchableOpacity
-            style={tw`bg-red-500 rounded-full py-4 px-8 mt-4`}
+            style={tw`bg-red-500 rounded-lg py-4 px-8 mt-4`}
             onPress={() => signOut()}
           >
             <Text style={tw`text-white font-semibold text-center text-lg`}>
@@ -169,5 +172,16 @@ const Profile = ({ navigation }) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 70,
+    alignItems: 'center',
+  },
+  heading: {
+    fontSize: 28,
+    fontWeight: '600',
+  },
+});
 
 export default Profile;

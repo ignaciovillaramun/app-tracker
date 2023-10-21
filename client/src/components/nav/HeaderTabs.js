@@ -21,7 +21,7 @@ export default function HeaderTabs() {
     <SafeAreaView>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('EnableLocation');
+          navigation.navigate('Enable');
         }}
       >
         <FontAwesome5 name="sign-out-alt" size={25} />

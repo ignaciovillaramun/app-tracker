@@ -32,7 +32,6 @@ const SignIn = ({ navigation }) => {
         email,
         password,
       });
-      console.log(data);
 
       if (data.error) {
         alert(data.error);
@@ -46,12 +45,12 @@ const SignIn = ({ navigation }) => {
         // console.log('SIGN IN SUCCESS =>', data);
         alert('Sign in successful');
         //redirect
-        // navigation.navigate('EnableLocation');
+        // navigation.navigate('Enable');
       }
       // setShowAlert(true);
     } catch (error) {
       alert('Signup failed. Try again');
-      console.log('hello', error);
+      console.log(error);
       setLoading(false);
     }
   };
