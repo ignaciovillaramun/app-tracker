@@ -31,9 +31,11 @@ const Splash = () => {
     fadeIn();
 
     setTimeout(() => {
-      fadeOut().then(() => {
-        navigation.navigate('SignIn');
-      });
+      fadeOut()
+        .then(() => {
+          navigation.navigate('SignIn');
+        })
+        .catch((error) => console.log(error));
     }, 2000);
   }, []);
 

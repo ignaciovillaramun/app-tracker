@@ -33,7 +33,7 @@ export default function EnableLocation({ navigation }) {
   const [location, setLocation] = useState(null);
   const [showLocation, setShowLocation] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
-  const [isDriving, setIsDriving] = useState(false); // Boolean state for driving
+  const [isDriving, setIsDriving] = useState(false);
 
   const getPermissions = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();

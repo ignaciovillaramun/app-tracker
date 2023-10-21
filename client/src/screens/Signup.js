@@ -116,7 +116,7 @@ const Signup = ({ navigation }) => {
         <Text style={tw`text-center mt-4`}>
           Already Joined?{' '}
           <Text
-            onPress={() => navigation.navigate('Signin')}
+            onPress={() => navigation.navigate('SignIn')}
             style={tw`text-blue-500`}
           >
             Sign In

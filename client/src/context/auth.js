@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
         if (res.status === 401 && res.config && !res.config.__isRetryRequest) {
           await AsyncStorage.removeItem('@auth');
           setState({ user: null, token: '' });
-          navigation.navigate('Signin');
+          navigation.navigate('SignIn');
         }
       } else {
         // Handle the case when error.response is undefined

@@ -26,7 +26,7 @@ export default function FooterTabs() {
       <View style={tw`flex-row justify-between pt-5 px-9`}>
         <Tab
           name="Home"
-          icon="home"
+          icon="clipboard-list"
           handlePress={() => navigation.navigate('Home')}
           screenName="Home"
           routeName={route.name}
@@ -40,7 +40,7 @@ export default function FooterTabs() {
         />
         <Tab
           name="Profile"
-          icon="user"
+          icon="user-circle"
           handlePress={() => navigation.navigate('Profile')}
           screenName="Profile"
           routeName={route.name}

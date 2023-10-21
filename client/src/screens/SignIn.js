@@ -46,7 +46,7 @@ const SignIn = ({ navigation }) => {
         // console.log('SIGN IN SUCCESS =>', data);
         alert('Sign in successful');
         //redirect
-        navigation.navigate('EnableLocation');
+        // navigation.navigate('EnableLocation');
       }
       // setShowAlert(true);
     } catch (error) {
