@@ -34,7 +34,7 @@ export default function ScreensNav() {
             component={BusSelector}
             options={{
               headerBackTitle: 'Back',
-              title: 'Select Bus',
+              headerShown: false,
             }}
           />
           <Stack.Screen

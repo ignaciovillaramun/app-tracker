@@ -1,6 +1,6 @@
 import React from 'react';
 import RootNavigation from '../../navigation';
 
-export default function App() {
+export default function () {
   return <RootNavigation />;
 }

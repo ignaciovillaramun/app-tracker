@@ -37,22 +37,22 @@ export default function List() {
           <TouchableOpacity
             style={[
               tw`p-4 justify-center items-center w-38`,
-              selectedOption === 'van' && { backgroundColor: '#FEC007' },
+              selectedOption === 'Van' && { backgroundColor: '#FEC007' },
             ]}
-            onPress={() => handleOptionSelect('van')}
+            onPress={() => handleOptionSelect('Van')}
           >
-            <Icon name="bus" size={60} style={tw`mb-2`} color={selectedOption === 'van' ? 'white' : '#FEC007'} />
-            <Text style={[tw`text-center mt-2 text-2xl`, selectedOption === 'van' && { color: 'white' }]}>Van</Text>
+            <Icon name="bus" size={60} style={tw`mb-2`} color={selectedOption === 'Van' ? 'white' : '#FEC007'} />
+            <Text style={[tw`text-center mt-2 text-2xl`, selectedOption === 'Van' && { color: 'white' }]}>Van</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
               tw`p-4 justify-center items-center w-38`,
-              selectedOption === 'bus' && { backgroundColor: '#FEC007' },
+              selectedOption === 'Bus' && { backgroundColor: '#FEC007' },
             ]}
-            onPress={() => handleOptionSelect('bus')}
+            onPress={() => handleOptionSelect('Bus')}
           >
-            <Icon name="bus-alt" size={60} style={tw`mb-2`} color={selectedOption === 'bus' ? 'white' : '#FEC007'} />
-            <Text style={[tw`text-center mt-2 text-2xl`, selectedOption === 'bus' && { color: 'white' }]}>Bus</Text>
+            <Icon name="bus-alt" size={60} style={tw`mb-2`} color={selectedOption === 'Bus' ? 'white' : '#FEC007'} />
+            <Text style={[tw`text-center mt-2 text-2xl`, selectedOption === 'Bus' && { color: 'white' }]}>Bus</Text>
           </TouchableOpacity>
         </View>
         {selectedOption ? (

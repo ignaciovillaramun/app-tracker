@@ -58,9 +58,9 @@ export default function App() {
           /> */}
         </View>
       </View>
-      {/* <View style={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.heading}>Notifications</Text>
-      </View> */}
+      </View>
       <View style={styles.OptionsContainer}>
         <View style={styles.row}>
           <Text style={styles.optionText}>Vehicle Broke Down</Text>
@@ -117,11 +117,11 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-    backgroundColor: '#fff',
     alignItems: 'center',
   },
   heading: {
     fontSize: 28,
+    fontWeight:'600'
   },
   PictureContainer: {
     marginTop: 70,

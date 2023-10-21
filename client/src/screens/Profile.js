@@ -111,20 +111,20 @@ const Profile = ({ navigation }) => {
               <TouchableOpacity onPress={() => handleUpload()}>
                 <Image
                   source={{ url: image.url }}
-                  style={tw`w-43 h-43 rounded-full`}
+                  style={tw`w-43 h-43 rounded-full mt-10`}
                 />
               </TouchableOpacity>
             ) : uploadImage ? (
               <TouchableOpacity onPress={() => handleUpload()}>
                 <Image
                   source={{ url: uploadImage }}
-                  style={tw`w-43 h-43 rounded-full`}
+                  style={tw`w-43 h-43 rounded-full mt-10`}
                 />
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
                 onPress={() => handleUpload()}
-                style={tw`rounded-full bg-gray-300 p-16`}
+                style={tw`rounded-full bg-gray-300 p-16 mt-10`}
               >
                 <FontAwesome5
                   name="camera"
@@ -135,10 +135,10 @@ const Profile = ({ navigation }) => {
             )}
           </Logo>
 
-          <Text style={tw`text-3xl font-bold mb-2 mt-10 text-center`}>
+          <Text style={tw`text-3xl font-bold mb-2 mt-20 text-center`}>
             Hi, {name}
           </Text>
-          <Text style={tw`font-bold mb-2 text-center`}>{email}</Text>
+          <Text style={tw`font-medium mb-2 text-center text-lg`}>{email}</Text>
           <Text style={tw` mb-4 text-center font-thin `}>{role}</Text>
           {/* <UserInput
           name="Password"
@@ -157,7 +157,7 @@ const Profile = ({ navigation }) => {
             style={tw`bg-red-500 rounded-full py-4 px-8 mt-4`}
             onPress={() => signOut()}
           >
-            <Text style={tw`text-white font-semibold text-center`}>
+            <Text style={tw`text-white font-semibold text-center text-lg`}>
               Log Out
             </Text>
           </TouchableOpacity>

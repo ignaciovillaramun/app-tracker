@@ -58,13 +58,13 @@ const Home = () => {
       <KeyboardAwareScrollView contentContainerStyle={tw`flex-1 bg-white p-4`}>
         {/* Place Section */}
         <View style={tw`p-4`}>
-          <Text style={tw`mb-2`}>Place:</Text>
+          <Text style={tw`mb-2 text-2xl pb-10 z-10 mb-[-20] text-center font-bold`}>Place:</Text>
           <Picker
             selectedValue={selectedPlace}
             onValueChange={(itemValue, itemIndex) => {
               setSelectedPlace(itemValue);
             }}
-            style={tw` rounded p-2`}
+            style={tw` rounded p-2 my-[-20px]`}
             itemStyle={{
               placeholderTextColor: 'blue',
               fontSize: 20,
@@ -85,9 +85,9 @@ const Home = () => {
 
         {/* Passenger Off Section */}
         <View style={tw`p-4`}>
-          <Text style={tw`mb-2`}>Passenger Off:</Text>
+          <Text style={tw`mb-2 mt-[-30px] text-lg font-medium`}>Passenger Off:</Text>
           <TextInput
-            style={tw`border rounded p-2`}
+            style={tw`border rounded p-2 text-lg`}
             placeholder="Number of passengers off"
             value={passengerOff}
             onChangeText={(text) => setPassengerOff(text)}
@@ -97,9 +97,9 @@ const Home = () => {
 
         {/* Passenger On Section */}
         <View style={tw`p-4`}>
-          <Text style={tw`mb-2`}>Passenger On:</Text>
+          <Text style={tw`mb-2 text-lg font-medium`}>Passenger On:</Text>
           <TextInput
-            style={tw`border rounded p-2`}
+            style={tw`border rounded p-2 text-lg`}
             placeholder="Number of passengers on"
             value={passengerOn}
             onChangeText={(text) => setPassengerOn(text)}
@@ -110,7 +110,7 @@ const Home = () => {
           onPress={handleFormSubmit}
           style={tw`bg-yellow-500 rounded-md p-2 mt-4`}
         >
-          <Text style={tw`text-white text-center text-lg`}>
+          <Text style={tw`text-white text-center text-2xl `}>
             Send Information
           </Text>
         </TouchableOpacity>
