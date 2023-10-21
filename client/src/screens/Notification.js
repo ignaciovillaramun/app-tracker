@@ -7,6 +7,7 @@ import {
   Image,
   Switch,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import FooterTabs from '../components/nav/FooterTabs';
 import tw from 'twrnc';

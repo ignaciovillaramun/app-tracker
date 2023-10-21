@@ -182,12 +182,6 @@ export default function EnableLocation({ navigation }) {
                 Disable
               </Text>
             </TouchableOpacity>
-            {location && (
-              <Text>
-                Latitude: {location.coords.latitude}, Longitude:{' '}
-                {location.coords.longitude}
-              </Text>
-            )}
           </>
         )}
         <StatusBar style="auto" />

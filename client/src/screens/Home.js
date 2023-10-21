@@ -67,9 +67,7 @@ const Home = () => {
             style={tw` rounded p-2`}
             itemStyle={{
               placeholderTextColor: 'blue',
-              color: 'orange',
-              fontFamily: 'Ebrima',
-              fontSize: 17,
+              fontSize: 20,
             }}
           >
             <Picker.Item label="Select a place" value="" />

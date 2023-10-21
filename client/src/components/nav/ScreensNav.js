@@ -35,7 +35,8 @@ export default function ScreensNav() {
             options={{
               headerBackTitle: 'Back',
               title: 'Select Bus',
-            }}/>
+            }}
+          />
           <Stack.Screen
             name="EnableLocation"
             component={EnableLocation}
