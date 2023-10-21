@@ -6,11 +6,12 @@ import Home from '../../screens/Home';
 import { AuthContext } from '../../context/auth';
 import HeaderTabs from './HeaderTabs';
 import Profile from '../../screens/Profile';
-import List from '../../screens/List';
+import List from '../../screens/BusSelector';
 import Notification from '../../screens/Notification';
 import ForgotPassword from '../../screens/ForgotPassword';
 import EnableLocation from '../../screens/EnableLocation';
 import Splash from '../../screens/Splash';
+import BusSelector from '../../screens/BusSelector';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,12 +23,19 @@ export default function ScreensNav() {
 
   return (
     <Stack.Navigator
-      initialRouteName="Splash"
+      initialRouteName="BusSelector"
       //   screenOptions={{ headerShown: false }}
     >
       {authenticated ? (
         <>
           {/* <Stack.Screen name="Splash" component={Splash} /> */}
+          <Stack.Screen
+            name="BusSelector"
+            component={BusSelector}
+            options={{
+              headerBackTitle: 'Back',
+              title: 'Select Bus',
+            }}/>
           <Stack.Screen
             name="EnableLocation"
             component={EnableLocation}
