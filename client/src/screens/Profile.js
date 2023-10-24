@@ -12,6 +12,7 @@ import { AuthContext } from '../context/auth';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import * as ImagePicker from 'expo-image-picker';
 import FooterTabs from '../components/nav/FooterTabs';
+import { UseLocation } from '../context/LocationContext';
 
 const Profile = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -25,10 +26,15 @@ const Profile = ({ navigation }) => {
     url: '',
     public_id: '',
   });
+
   // State
   const [state, setState] = useContext(AuthContext);
 
+  //Location Context
+  const { clearLocationInterval } = UseLocation();
+
   const signOut = async () => {
+    clearLocationInterval();
     setState({ token: '', user: null });
     await AsyncStorage.removeItem('@auth');
   };

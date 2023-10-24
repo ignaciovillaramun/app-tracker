@@ -25,17 +25,17 @@ export default function FooterTabs() {
       <Divider width={1} />
       <View style={tw`flex-row justify-between pt-8 px-9`}>
         <Tab
-          name="Bus"
-          icon="bus"
-          handlePress={() => navigation.navigate('Bus')}
-          screenName="Bus"
-          routeName={route.name}
-        />
-        <Tab
           name="Enable"
           icon="location-arrow"
           handlePress={() => navigation.navigate('Enable')}
           screenName="Enable"
+          routeName={route.name}
+        />
+        <Tab
+          name="Bus"
+          icon="bus"
+          handlePress={() => navigation.navigate('Bus')}
+          screenName="Bus"
           routeName={route.name}
         />
         <Tab

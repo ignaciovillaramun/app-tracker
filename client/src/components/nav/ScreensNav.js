@@ -22,26 +22,26 @@ export default function ScreensNav() {
 
   return (
     <Stack.Navigator
-      initialRouteName="Bus"
+      initialRouteName="Enable"
       screenOptions={{ headerShown: false }}
     >
       {authenticated ? (
         <>
           {/* <Stack.Screen name="Splash" component={Splash} /> */}
           <Stack.Screen
-            name="Bus"
-            component={Bus}
-            options={{
-              headerBackTitle: 'Back',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
             name="Enable"
             component={Enable}
             options={{
               headerBackTitle: 'Back',
               title: 'Enable Location',
+            }}
+          />
+          <Stack.Screen
+            name="Bus"
+            component={Bus}
+            options={{
+              headerBackTitle: 'Back',
+              headerShown: false,
             }}
           />
           <Stack.Screen

@@ -87,7 +87,7 @@ export default function List() {
               style={tw`bg-yellow-500 p-4 rounded-lg mt-6 w-10/12`}
               onPress={() => {
                 submitBusType();
-                navigation.navigate('Enable');
+                navigation.navigate('Stops');
               }}
             >
               <Text

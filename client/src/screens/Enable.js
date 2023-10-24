@@ -4,16 +4,35 @@ import { Text, View, Image, TouchableOpacity, Animated } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 import FooterTabs from '../components/nav/FooterTabs';
-import { ref, set, update } from 'firebase/database';
+import { ref, set, update, get } from 'firebase/database';
 import { db } from '../../firebaseCongif';
 import tw from 'twrnc';
+import { UseLocation } from '../context/LocationContext';
 
 export default function EnableLocation({ navigation }) {
   const [location, setLocation] = useState(null);
   const [showLocation, setShowLocation] = useState(false);
-  const [intervalId, setIntervalId] = useState(null);
+  // const [intervalId, setIntervalId] = useState(null);
   const [isDriving, setIsDriving] = useState(false);
   const [jumpAnimation] = useState(new Animated.Value(0));
+  const { intervalId, setIntervalId, clearLocationInterval } = UseLocation(); // Access intervalId and clearLocationInterval from the context
+
+  console.log('hello', intervalId);
+  useEffect(() => {
+    const isDrivingRef = ref(db, 'locations/');
+
+    get(isDrivingRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const { isDriving } = snapshot.val();
+          console.log(isDriving);
+          setIsDriving(isDriving);
+        } else {
+          console.log('No data available');
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const getPermissions = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -26,7 +45,7 @@ export default function EnableLocation({ navigation }) {
     }
 
     if (intervalId) {
-      clearInterval(intervalId);
+      clearLocationInterval(intervalId);
     }
 
     setIsDriving(false);
@@ -94,7 +113,7 @@ export default function EnableLocation({ navigation }) {
     setIsDriving(true);
     console.log('stop');
     if (intervalId) {
-      clearInterval(intervalId);
+      clearLocationInterval(intervalId);
       setIntervalId(null);
     }
     setShowLocation(false);
@@ -137,7 +156,7 @@ export default function EnableLocation({ navigation }) {
 
   useEffect(() => {
     if (!showLocation && intervalId) {
-      clearInterval(intervalId);
+      clearLocationInterval(intervalId);
       setIntervalId(null);
     }
   }, [showLocation]);
@@ -178,9 +197,9 @@ export default function EnableLocation({ navigation }) {
               await new Promise((resolve) => {
                 setTimeout(() => {
                   resolve();
-                }, 2800); // Wait for 2 seconds for the animation to complete
+                }, 2800);
               });
-              navigation.navigate('Stops');
+              navigation.navigate('Bus');
             }}
           >
             <Text style={tw`text-white font-semibold text-center`}>Enable</Text>
