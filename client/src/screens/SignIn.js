@@ -27,7 +27,6 @@ const SignIn = ({ navigation }) => {
     }
 
     try {
-      console.log('hello');
       const { data } = await axios.post(`/signin`, {
         email,
         password,

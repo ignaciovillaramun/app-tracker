@@ -16,8 +16,9 @@ export default function EnableLocation({ navigation }) {
   const [isDriving, setIsDriving] = useState(false);
   const [jumpAnimation] = useState(new Animated.Value(0));
   const { intervalId, setIntervalId, clearLocationInterval } = UseLocation(); // Access intervalId and clearLocationInterval from the context
+  const defaultImageUrl =
+    'https://res.cloudinary.com/dgaeuu30f/image/upload/v1698111783/hur7wzsw5zwzv2pnskhf.jpg';
 
-  console.log('hello', intervalId);
   useEffect(() => {
     const isDrivingRef = ref(db, 'locations/');
 
@@ -25,7 +26,6 @@ export default function EnableLocation({ navigation }) {
       .then((snapshot) => {
         if (snapshot.exists()) {
           const { isDriving } = snapshot.val();
-          console.log(isDriving);
           setIsDriving(isDriving);
         } else {
           console.log('No data available');
@@ -57,7 +57,9 @@ export default function EnableLocation({ navigation }) {
     const timestamp = currentLocation.timestamp;
 
     const { name } = userData.user;
-    const { url } = userData.user.image;
+    const { url } = userData?.user?.image
+      ? userData.user.image
+      : { url: defaultImageUrl };
 
     const locationData = {
       latitude,
