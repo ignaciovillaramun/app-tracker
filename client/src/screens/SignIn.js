@@ -1,6 +1,6 @@
 // import CustomAlert from '../components/Alert';
 import tw from 'twrnc';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import UserInput from '../components/auth/UserInput';
@@ -9,14 +9,37 @@ import Logo from '../components/auth/Logo';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../context/auth';
+import { db } from '../../firebaseCongif';
+import { ref, set, update, get, child } from 'firebase/database';
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [state, setState] = useContext(AuthContext);
+  const [authenticated, setAuthenticated] = useState();
+
+  useEffect(() => {
+    userLogged();
+  }, []);
+
+  const userLogged = async () => {
+    const userAuthenticated = ref(db, 'authenticated/');
+    const snapshot = await get(userAuthenticated);
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      setAuthenticated(data.authenticated);
+    } else {
+      console.log('No data available');
+    }
+  };
 
   const handleSubmit = async () => {
+    await userLogged();
+
+    if (authenticated) {
+      return alert('Someone is already logged in!');
+    }
     setLoading(true);
 
     if (!email || !password) {
@@ -27,6 +50,10 @@ const SignIn = ({ navigation }) => {
     }
 
     try {
+      update(ref(db, '/authenticated'), {
+        authenticated: true,
+      });
+
       const { data } = await axios.post(`/signin`, {
         email,
         password,
@@ -36,17 +63,18 @@ const SignIn = ({ navigation }) => {
         alert(data.error);
         setLoading(false);
       } else {
+        // if (authenticated) {
+        //   alert(' Someone is already login');
+        // } else {
         // save in context
         setState(data);
         //save response in async storage
         await AsyncStorage.setItem('@auth', JSON.stringify(data));
+        userLogged();
         setLoading(false);
         // console.log('SIGN IN SUCCESS =>', data);
         alert('Sign in successful');
-        //redirect
-        // navigation.navigate('Enable');
       }
-      // setShowAlert(true);
     } catch (error) {
       alert('Signup failed. Try again');
       console.log(error);
@@ -59,6 +87,7 @@ const SignIn = ({ navigation }) => {
   //     console.log('Async storage', data);
   //   };
   //   loadFormAsyncStorage();
+  console.log('hello user', authenticated);
 
   return (
     <KeyboardAwareScrollView

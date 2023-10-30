@@ -9,10 +9,10 @@ import {
   ImageBackground,
   Image,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 
-const Splash = () => {
-  const navigation = useNavigation();
+const Splash = ({ navigation }) => {
+  // const navigation = useNavigation();
 
   // fadeAnim will be used as the value for opacity. Initial Value: 0
   const fadeAnim = useRef(new Animated.Value(0)).current;

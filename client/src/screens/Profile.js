@@ -13,6 +13,8 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import * as ImagePicker from 'expo-image-picker';
 import FooterTabs from '../components/nav/FooterTabs';
 import { UseLocation } from '../context/LocationContext';
+import { db } from '../../firebaseCongif';
+import { ref, set, update, get, child } from 'firebase/database';
 
 const Profile = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -37,6 +39,10 @@ const Profile = ({ navigation }) => {
     clearLocationInterval();
     setState({ token: '', user: null });
     await AsyncStorage.removeItem('@auth');
+
+    update(ref(db, '/authenticated'), {
+      authenticated: false,
+    });
   };
 
   useEffect(() => {
