@@ -85,16 +85,16 @@ const Stops = () => {
               fontSize: 20,
             }}
           >
-            <Picker.Item label="Select a place" value="" />
-            <Picker.Item label="BYUI PARKING LOT" value="BYUI PARKING LOT" />
-            <Picker.Item label="BYUI HART" value="BYUI HART" />
-            <Picker.Item label="COLONIAL HOUSE" value="COLONIAL HOUSE" />
-            <Picker.Item label="CAMDEN APARTMENTS" value="CAMDEN APARTMENTS" />
-            <Picker.Item label="THE GATES" value="THE GATES" />
-            <Picker.Item label="CENTER SQUARE" value="CENTER SQUARE" />
-            <Picker.Item label="ASPEN VILLAGE" value="ASPEN VILLAGE" />
-            <Picker.Item label="EAST MC CIRCLE" value="EAST MC CIRCLE" />
-            <Picker.Item label="WALMART" value="WALMART" />
+            <Picker.Item label='Select a place' value='' />
+            <Picker.Item label='WALMART' value='Walmart' />
+            <Picker.Item label='EAST MC CIRCLE' value='East MC Circle' />
+            <Picker.Item label='ASPEN VILLAGE' value='Aspen Village' />
+            <Picker.Item label='CENTER SQUARE' value='Center Square' />
+            <Picker.Item label='THE GATES' value='The Gates' />
+            <Picker.Item label='CAMDEN APARTMENTS' value='Camden Apartments' />
+            <Picker.Item label='COLONIAL HOUSE' value='Colonial House' />
+            <Picker.Item label='BYUI HART' value='BYU-I Hart' />
+            <Picker.Item label='BYUI PARKING LOT' value='BYU-I Parking Lot' />
           </Picker>
         </View>
 
@@ -105,10 +105,10 @@ const Stops = () => {
           </Text>
           <TextInput
             style={tw`border rounded p-2 text-lg`}
-            placeholder="Number of passengers off"
+            placeholder='Number of passengers off'
             value={passengerOff}
             onChangeText={(text) => setPassengerOff(text)}
-            keyboardType="numeric"
+            keyboardType='numeric'
           />
         </View>
 
@@ -117,10 +117,10 @@ const Stops = () => {
           <Text style={tw`mb-2 text-lg font-medium`}>Passenger On:</Text>
           <TextInput
             style={tw`border rounded p-2 text-lg`}
-            placeholder="Number of passengers on"
+            placeholder='Number of passengers on'
             value={passengerOn}
             onChangeText={(text) => setPassengerOn(text)}
-            keyboardType="numeric"
+            keyboardType='numeric'
           />
         </View>
         <TouchableOpacity
